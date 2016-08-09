@@ -78,15 +78,12 @@ var CommentList = React.createClass({
 
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
-    
-      result = eval(comment.maxP) + eval(comment.currentP);
-      //Ç±Ç±ÅIÅIÅI
-      //result[] = [1,2,3];
-      //Console.log(result);
       
+      //var array = eval(comment.maxP) + eval(comment.currentP);
+      var array[] = [1,2,3];
       return (
         <Comment maxP={comment.maxP} currentP={comment.currentP} key={comment.id}>
-          {this.result}
+          {array}
         </Comment>
       );
     });
@@ -125,13 +122,13 @@ var CommentForm = React.createClass({
       <form className="commentForm" onSubmit={this.handleSubmit}>
         <input
           type="currentP"
-          placeholder="Your name"
+          placeholder="Max page is..."
           value={this.state.maxP}
           onChange={this.handleMaxPChange}
         />
         <input
           type="currentP"
-          placeholder="Say something..."
+          placeholder="Current page is..."
           value={this.state.currentP}
           onChange={this.handleCurrentPChange}
         />
