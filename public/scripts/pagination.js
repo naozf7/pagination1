@@ -80,7 +80,7 @@ var CommentList = React.createClass({
     var commentNodes = this.props.data.map(function(comment) {
       
       //var array = eval(comment.maxP) + eval(comment.currentP);
-      var array[] = [1,2,3];
+      var array = [1,2,3];
       return (
         <Comment maxP={comment.maxP} currentP={comment.currentP} key={comment.id}>
           {array}
