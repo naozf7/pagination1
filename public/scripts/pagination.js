@@ -78,11 +78,9 @@ var CommentList = React.createClass({
 
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
-      
-      //var array = eval(comment.maxP) + eval(comment.currentP);
-      
-      //配列の要素はF,R1,Box(5),R2,Lで全部で9つ
-      var box = new Array(9);
+
+      //配列の要素はF,R1,Box(5),R2,L
+      var box = new Array();
       var vmaxP = parseInt(comment.maxP);
       var vcurP = parseInt(comment.currentP);
       
@@ -161,7 +159,7 @@ var CommentList = React.createClass({
          
          }
       }
-      
+
       //boxの左端チェック
       if(box[2] == 2){
          box[2] = "";
