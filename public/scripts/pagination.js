@@ -80,10 +80,100 @@ var CommentList = React.createClass({
     var commentNodes = this.props.data.map(function(comment) {
       
       //var array = eval(comment.maxP) + eval(comment.currentP);
-      var array = [1,2,3];
+      
+      //配列の要素はF,R1,Box(5),R2,Lで全部で9つ
+      var box = new Array(9);
+      var vmaxP = parseInt(comment.maxP);
+      var vcurP = parseInt(comment.currentP);
+      
+      const boxNum = 5;
+      const range = (boxNum-1)/2;
+      
+      //vmaxPが5ページまで
+      if (vmaxP <= boxNum){
+      
+         //F,R1はブランク
+         box.push("","");
+         
+         //boxは1～vmaxPまで
+         for (var i = 1 ; i <= vmaxP ; i++){
+            box.push(i);
+         }
+         
+         //boxの残りとR2,Lはブランク
+         while(box.length < 9){
+            box.push("");
+         }
+         
+      //vmaxPが5ページより大きい
+      }else{
+      
+         //条件A: vcurP - range > 1
+         //条件B: vcurP + range < vmaxP
+         
+         //A & B
+         if(((vcurP - range) > 1) & (vcurP + range < vmaxP)){
+         
+            //F,R1
+            box.push(1,"...");
+            
+            //boxはvcurP-rangeからvcurP+rangeまで
+            for(var i = (vcurP - range) ; i <= (vcurP + range) ; i++){
+               box.push(i);
+            }
+            
+            //R2,L
+            box.push("...",vmaxP);
+         
+         //A! & B
+         }else if(((vcurP - range) <= 1) & (vcurP + range < vmaxP)){
+      
+            //F,R1はブランク
+            box.push("","");
+            
+            //boxは1～boxNumまで
+            for (var i = 1 ; i <= boxNum ; i++){
+               box.push(i);
+            }
+         
+            //R2,L
+            box.push("...",vmaxP);
+         
+         //A & B!
+         }else if(((vcurP - range) > 1) & (vcurP + range >= vmaxP)){
+         
+            //F,R1
+            box.push(1,"...");
+            
+            //boxはvmaxP-boxNum+1からvmaxPまで
+            for(var i = (vmaxP - boxNum + 1) ; i <= vmaxP ; i++){
+               box.push(i);
+            }
+            
+            //R2,Lはブランク
+            box.push("","");
+         
+         //A! & B!
+         }else{
+            //vcurP<=range+1 & vcurP>=vmaxP-range つまりvmaxP-range<=range +1 
+            //vmaxP<=2range+1 つまり vmaxP<=boxNum
+            //この分岐は不要
+         
+         }
+      }
+      
+      //boxの右端チェック
+      if(box[2] == 2){
+         box[2] = "";
+      }
+      //boxの左端チェック
+      if(box[6] == (vmaxP - 1)){
+         box[6] = "";
+      }
+      
       return (
         <Comment maxP={comment.maxP} currentP={comment.currentP} key={comment.id}>
-          {array}
+          {box}
         </Comment>
       );
     });
