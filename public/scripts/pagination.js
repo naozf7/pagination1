@@ -86,7 +86,7 @@ var CommentList = React.createClass({
       var vmaxP = parseInt(comment.maxP);
       var vcurP = parseInt(comment.currentP);
       
-      const boxNum = 5;
+      const boxNum = 5;  //3以上の奇数とすること
       const range = (boxNum-1)/2;
       
       //vmaxPが5ページまで
@@ -156,17 +156,17 @@ var CommentList = React.createClass({
          //A! & B!
          }else{
             //vcurP<=range+1 & vcurP>=vmaxP-range つまりvmaxP-range<=range +1 
-            //vmaxP<=2range+1 つまり vmaxP<=boxNum
+            //vmaxP<=2range+1 つまり vmaxP<=boxNumとなり、
             //この分岐は不要
          
          }
       }
       
-      //boxの右端チェック
+      //boxの左端チェック
       if(box[2] == 2){
          box[2] = "";
       }
-      //boxの左端チェック
+      //boxの右端チェック
       if(box[6] == (vmaxP - 1)){
          box[6] = "";
       }
